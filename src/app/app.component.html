@@ -5,7 +5,7 @@
 
       <ion-header>
         <ion-toolbar translucent>
-          <ion-title>Menu</ion-title>
+          <ion-icon style="font-size: 40px;" name="menu"></ion-icon>
         </ion-toolbar>
       </ion-header>
 
@@ -14,7 +14,11 @@
         <ion-list id="inbox-list">
 
           <ion-menu-toggle auto-hide="false">
-            <ion-item [routerLink]="['/tabs']" lines="none" detail="false">
+            <img src="../../../assets/logo.png">
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item lines="none" detail="false" [routerLink]="['/tabs/orders']">
               <ion-icon name="grid-outline" slot="start"></ion-icon>
               <ion-label>Dashboard</ion-label>
             </ion-item>
@@ -32,7 +36,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item lines="none" detail="false">
+            <ion-item lines="none" detail="false" [routerLink]="['/tabs/materials']">
               <ion-icon name="wallet-outline" slot="start"></ion-icon>
               <ion-label>Materials</ion-label>
             </ion-item>

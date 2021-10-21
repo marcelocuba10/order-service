@@ -1,4 +1,3 @@
-import { OrdersPage } from './../orders/orders.page';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -10,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'orders',
-        loadChildren: () => import('../orders/orders.module').then(m => m.OrdersPageModule)
+        loadChildren: () => import('../pages/orders/orders.module').then(m => m.OrdersPageModule)
       },
       {
         path: 'tab2',
@@ -19,6 +18,22 @@ const routes: Routes = [
       {
         path: 'tab3',
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+      },
+      {
+        path: 'materials',
+        loadChildren: () => import('../pages/materials/materials.module').then(m => m.MaterialsPageModule)
+      },
+      {
+        path: 'order-detail',
+        loadChildren: () => import('../pages/order-detail/order-detail.module').then(m => m.OrderDetailPageModule)
+      },
+      {
+        path: 'new-order',
+        loadChildren: () => import('../pages/new-order/new-order.module').then(m => m.NewOrderPageModule)
+      },
+      {
+        path: 'new-material',
+        loadChildren: () => import('../pages/new-material/new-material.module').then(m => m.NewMaterialPageModule)
       },
       {
         path: '',

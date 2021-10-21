@@ -1,0 +1,63 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/tabs/orders"></ion-back-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-grid style="border-radius: 20px;">
+    <ion-row>
+      <ion-col size="9">
+        <ion-text color="secondary">
+          <h1 style="margin-left: 17px;font-family: cursive;color: #000;font-weight: bold;font-size: 30px;">New Order of Service</h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon style="font-size: 33px;text-align: center;margin-top: 25px;margin-left: -25px;" name="document-text-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card style="width: 90%;margin:10px auto;box-shadow: 0px 0px;">
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Service title:</ion-label>
+      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Describe the service or issue:</ion-label>
+      <ion-textarea style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-textarea>
+    </ion-item>
+    <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">Category</ion-label>
+      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option value="dos">Gardening</ion-select-option>
+        <ion-select-option value="lunix">Construction</ion-select-option>
+        <ion-select-option value="mac7">Electricity</ion-select-option>
+        <ion-select-option value="mac8">Mechanics</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none" style="margin-bottom: -12px;">
+      <ion-label style="font-size: 20px;margin-top: -10px;" position="stacked">Capture current location:</ion-label>
+      <ion-toggle style="margin-top: 15px;" slot="end" mode="ios" checked color="dark" [(ngModel)]="toggleValue"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address:</ion-label>
+      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-input>
+    </ion-item>
+    <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">Customer</ion-label>
+      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option value="dos">Mathias Rojas</ion-select-option>
+        <ion-select-option value="lunix">Carmen Houston</ion-select-option>
+        <ion-select-option value="mac7">Pedro Barboza</ion-select-option>
+        <ion-select-option value="mac8">Adele Robinson</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-list style="text-align:center;margin-top: 10px;">
+      <ion-button size="default" mode="ios" color="dark">Create service order</ion-button>
+    </ion-list>
+    
+  </ion-card>
+
+</ion-content>

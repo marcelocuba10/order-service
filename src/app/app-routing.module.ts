@@ -9,6 +9,18 @@ const routes: Routes = [
   {
     path: 'materials',
     loadChildren: () => import('./pages/materials/materials.module').then( m => m.MaterialsPageModule)
+  },
+  {
+    path: 'order-detail',
+    loadChildren: () => import('./pages/order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
+  },
+  {
+    path: 'new-order',
+    loadChildren: () => import('./pages/new-order/new-order.module').then( m => m.NewOrderPageModule)
+  },
+  {
+    path: 'new-material',
+    loadChildren: () => import('./pages/new-material/new-material.module').then( m => m.NewMaterialPageModule)
   }
 ];
 @NgModule({
