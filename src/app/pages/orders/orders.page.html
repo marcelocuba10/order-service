@@ -26,9 +26,9 @@
 
   <ion-list>
 
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['../order-detail']">
+    <ion-card *ngFor="let order of orders" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['/order-detail/', order.id]">
       <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Prune the garden</ion-card-title>
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
         <ion-grid>
           <ion-row style="margin-left: -10px;">
             <ion-col size="3">
@@ -37,67 +37,20 @@
               </ion-text>
             </ion-col>
             <ion-col size="6">
-              <ion-card-subtitle class="ion-text-center">Marcos Arevalos</ion-card-subtitle>
+              <ng-container *ngFor="let user of users">
+                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId === user.id">{{ user.name }}</ion-card-subtitle>
+              </ng-container>
             </ion-col>
             <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="success">Constrution</ion-badge>
+                <ng-container *ngFor="let category of categories">
+                    <ion-badge style="margin-top: -4px;" [color]="category.color" *ngIf="order.categoryId === category.id">{{ category.name }}</ion-badge>
+                </ng-container>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card-header>
       <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;">
-      <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Prune the garden</ion-card-title>
-        <ion-grid>
-          <ion-row style="margin-left: -10px;">
-            <ion-col size="3">
-              <ion-text color="secondary">
-                <ion-card-subtitle>13:35 pm</ion-card-subtitle>
-              </ion-text>
-            </ion-col>
-            <ion-col size="6">
-              <ion-card-subtitle class="ion-text-center">Marcos Arevalos</ion-card-subtitle>
-            </ion-col>
-            <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="warning">Electricity</ion-badge>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;">
-      <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Prune the garden</ion-card-title>
-        <ion-grid>
-          <ion-row style="margin-left: -10px;">
-            <ion-col size="3">
-              <ion-text color="secondary">
-                <ion-card-subtitle>13:35 pm</ion-card-subtitle>
-              </ion-text>
-            </ion-col>
-            <ion-col size="6">
-              <ion-card-subtitle class="ion-text-center">Marcos Arevalos</ion-card-subtitle>
-            </ion-col>
-            <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="tertiary">Mechanics</ion-badge>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
+        {{ order.description }}
       </ion-card-content>
     </ion-card>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-materials',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaterialsPage implements OnInit {
 
-  constructor() { }
+  private materials: any;
+  private categories: any;
+
+  constructor(
+    public apiService: ApiService,
+    ) { }
 
   ngOnInit() {
+    this.apiService.getMaterials().subscribe(response => {
+        this.materials = response;
+        console.log(this.materials);
+      });
+      this.getCategories();
+  }
+
+  getCategories(){
+    this.apiService.getCategories().subscribe(response => {
+      this.categories = response;
+      console.log(this.categories);
+    });
   }
 
 }

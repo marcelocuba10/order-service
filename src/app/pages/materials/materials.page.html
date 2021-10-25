@@ -6,7 +6,7 @@
 </ion-toolbar>
 
 <ion-content [fullscreen]="true">
-  <ion-grid style="border-radius: 20px;margin-top: -18px;">
+  <ion-grid style="border-radius: 20px">
     <ion-row>
       <ion-col size="9">
         <ion-text color="secondary">
@@ -14,7 +14,7 @@
         </ion-text>
       </ion-col>
       <ion-col size="3">
-        <ion-icon style="font-size: 33px;text-align: center;margin-top: 25px;" name="briefcase"></ion-icon>
+        <ion-icon style="font-size: 33px;text-align: center;margin-top: 25px;" name="briefcase-outline"></ion-icon>
       </ion-col>
     </ion-row>
     <ion-row style="margin-top: -15px;">
@@ -26,74 +26,29 @@
 
   <ion-list>
 
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['../order-detail']">
+    <ion-card *ngFor="let material of materials" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['/material-detail/', material.id]">
       <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Splitter brand drill</ion-card-title>
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ material.title }}</ion-card-title>
         <ion-grid>
           <ion-row style="margin-left: -10px;">
             <ion-col size="9">
               <ion-text color="secondary">
-                <ion-card-subtitle><ion-icon style="margin-bottom: -2px;" name="time-outline"></ion-icon> 5 Jan 2021, 15:25 pm</ion-card-subtitle>
+                <ion-card-subtitle><ion-icon name="calendar-outline" style="margin-bottom:-2px;color:#000;"></ion-icon> {{ material.date }}</ion-card-subtitle>
               </ion-text>
             </ion-col>
             <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="success">Obtained</ion-badge>
+              <ion-badge style="margin-top: -4px;" [class.color-warning]="material.status === 'Pending'" [class.color-success]="material.status === 'Obtained'">{{ material.status }}</ion-badge>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card-header>
       <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend.
+        {{ material.description }}
       </ion-card-content>
     </ion-card>
-
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;">
-      <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Metal ladder</ion-card-title>
-        <ion-grid>
-          <ion-row style="margin-left: -10px;">
-            <ion-col size="9">
-              <ion-text color="secondary">
-                <ion-card-subtitle><ion-icon style="margin-bottom: -2px;" name="time-outline"></ion-icon> 5 Jan 2021, 15:25 pm</ion-card-subtitle>
-              </ion-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="warning">Pending</ion-badge>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend.
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;">
-      <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">Pipe and screws</ion-card-title>
-        <ion-grid>
-          <ion-row style="margin-left: -10px;">
-            <ion-col size="9">
-              <ion-text color="secondary">
-                <ion-card-subtitle><ion-icon style="margin-bottom: -2px;" name="time-outline"></ion-icon> 5 Jan 2021, 15:25 pm</ion-card-subtitle>
-              </ion-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" color="success">Obtained</ion-badge>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend.
-      </ion-card-content>
-    </ion-card>
-
   </ion-list>
-    <ion-fab style="margin-bottom: 10px;" vertical="bottom" horizontal="end" slot="fixed">
+
+  <ion-fab style="margin-bottom: 10px;" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="dark" [routerLink]="['../new-material']">
       <ion-icon style="font-size: 40px;" name="add-outline"></ion-icon>
     </ion-fab-button>
