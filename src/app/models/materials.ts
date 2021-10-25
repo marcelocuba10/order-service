@@ -1,5 +1,5 @@
 export interface Materials {
-    title?: string;
+    name?: string;
     date?: string;
     status?: string;
     description?: string;

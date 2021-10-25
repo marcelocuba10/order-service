@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/new-order/new-order.module').then(m => m.NewOrderPageModule)
       },
       {
+        path: 'new-material/:id',
+        loadChildren: () => import('../pages/new-material/new-material.module').then(m => m.NewMaterialPageModule)
+      },
+      {
         path: 'new-material',
         loadChildren: () => import('../pages/new-material/new-material.module').then(m => m.NewMaterialPageModule)
       },
@@ -42,6 +46,11 @@ const routes: Routes = [
   {
     path: 'order-detail/:id',
     redirectTo: '/tabs/order-detail/:id',
+    pathMatch: 'full'
+  },
+  {
+    path: 'new-material/:id',
+    redirectTo: '/tabs/new-material/:id',
     pathMatch: 'full'
   }
 ];

@@ -120,4 +120,25 @@ export class ApiService {
     );
   }
 
+  public getMaterialById(id): Observable<Materials> {
+    return this.httpClient.get<Materials>(this.base_path + 'materials/' + id).pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  public createMaterial(data): Observable<Materials> {
+    return this.httpClient.post<Materials>(this.base_path + 'materials', JSON.stringify(data), this.httpOptions).pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
+  public updateMaterial(id, data): Observable<Materials> {
+    return this.httpClient.put<Materials>(this.base_path + 'materials/' + id, JSON.stringify(data), this.httpOptions).pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
+
 }

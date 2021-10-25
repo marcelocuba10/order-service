@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable eqeqeq */
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
@@ -28,7 +29,7 @@ export class AppService {
   async presentAlert(message: string) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: 'Atenção',
+      header: 'Atencion',
       message,
       buttons: ['OK']
     });
@@ -58,7 +59,17 @@ export class AppService {
 
   async formValidation(model, page) {
 
+    //model is a class;
+    //page contain the data;
+    console.log('ingreso en ');
+    for (let i = 0; i < model.length; i++) {
+      const element = model[i];
+      console.log('length: ' + model.length);
+      console.log('print: ' + element);
+    };
+
     if (page == 'maintenance') {
+
       if (!model.km) {
         this.presentAlert('Insira o quilometragem atual');
         return false;
@@ -102,17 +113,6 @@ export class AppService {
       if (!model.km) {
         this.presentAlert('Ingrese o quilometragem atual');
         this.loading.dismiss();
-        return false;
-      }
-    }
-
-    if (page != 'car') {
-      if (!model.custo) {
-        this.presentAlert('Insira o custo');
-        return false;
-      }
-      if (!model.data) {
-        this.presentAlert('Insira a data');
         return false;
       }
     }

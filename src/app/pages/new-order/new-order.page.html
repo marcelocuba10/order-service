@@ -22,19 +22,16 @@
   <ion-card style="width: 90%;margin:10px auto;box-shadow: 0px 0px;">
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Service title:</ion-label>
-      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-input>
+      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;" [(ngModel)]="order.title"></ion-input>
     </ion-item>
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Describe the service or issue:</ion-label>
-      <ion-textarea style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-textarea>
+      <ion-textarea style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;" [(ngModel)]="order.description"></ion-textarea>
     </ion-item>
     <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
       <ion-label style="font-size: 15px;margin-bottom: 16px;">Category</ion-label>
-      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
-        <ion-select-option value="dos">Gardening</ion-select-option>
-        <ion-select-option value="lunix">Construction</ion-select-option>
-        <ion-select-option value="mac7">Electricity</ion-select-option>
-        <ion-select-option value="mac8">Mechanics</ion-select-option>
+      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;" [(ngModel)]="order.categoryId" required>
+        <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item lines="none" style="margin-bottom: -12px;">
@@ -43,19 +40,16 @@
     </ion-item>
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address:</ion-label>
-      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;"></ion-input>
+      <ion-input style="padding: 0px 10px !important;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;" [(ngModel)]="order.address"></ion-input>
     </ion-item>
     <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
       <ion-label style="font-size: 15px;margin-bottom: 16px;">Customer</ion-label>
-      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
-        <ion-select-option value="dos">Mathias Rojas</ion-select-option>
-        <ion-select-option value="lunix">Carmen Houston</ion-select-option>
-        <ion-select-option value="mac7">Pedro Barboza</ion-select-option>
-        <ion-select-option value="mac8">Adele Robinson</ion-select-option>
+      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;" [(ngModel)]="order.userId" required>
+        <ion-select-option *ngFor="let user of users" [value]="user.id">{{user.name}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-list style="text-align:center;margin-top: 10px;">
-      <ion-button size="default" mode="ios" color="dark">Create service order</ion-button>
+      <ion-button size="default" mode="ios" color="dark" (click)="saveData(order)">Create service order</ion-button>
     </ion-list>
     
   </ion-card>

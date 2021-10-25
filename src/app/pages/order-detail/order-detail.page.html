@@ -23,12 +23,12 @@
       <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
       <ion-grid>
         <ion-row style="margin-left: -10px;">
-          <ion-col size="3">
+          <ion-col size="5">
             <ion-text color="secondary">
-              <ion-card-subtitle>13:35 pm</ion-card-subtitle>
+              <ion-card-subtitle>{{ order.date | date:'short' }}</ion-card-subtitle>
             </ion-text>
           </ion-col>
-          <ion-col size="6">
+          <ion-col size="4">
             <ion-card-subtitle class="ion-text-center">{{ user.name }}</ion-card-subtitle>
           </ion-col>
           <ion-col size="3">
