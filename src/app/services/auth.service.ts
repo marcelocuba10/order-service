@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
-import { Storage, StoragePlugin } from '@capacitor/storage';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user';
-//import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private storage: Storage,
+    private storage: NativeStorage,
     private env: EnvService,
   ) { }
 
@@ -25,7 +24,7 @@ export class AuthService {
     return this.http.post(this.env.API_URL + 'auth/login', { email, password }
     ).pipe(tap(token => {
       //ver aqui el storage, setItem o set
-        this.storage.set('token', token).then(
+        this.storage.setItem('token', token).then(
           () => {
             console.log('Token Stored');
           },
@@ -65,7 +64,7 @@ export class AuthService {
 
   getToken() {
     //ver aqui en storage si es getItem o get
-    return this.storage.get('token').then(data => {
+    return this.storage.getItem('token').then(data => {
       this.token = data;
       if (this.token != null) {
         this.isLoggedIn = true;
