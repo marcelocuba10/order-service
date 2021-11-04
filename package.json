@@ -29,6 +29,7 @@
     "@ionic-native/native-storage": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^3.0.6",
+    "cordova-plugin-nativestorage": "^2.3.2",
     "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
