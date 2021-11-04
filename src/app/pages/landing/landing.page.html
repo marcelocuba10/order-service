@@ -1,29 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <!-- <ion-title>landing</ion-title> -->
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-card class="welcome-card">
-    <ion-img src="/assets/shapes.svg"></ion-img>
-    <ion-card-header>
-      <ion-card-subtitle>Get Started</ion-card-subtitle>
-      <ion-card-title>Welcome to Ionic 4 Auth</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Starting point for Ionic 4 Application with Authentication.</p>
-    </ion-card-content>
-  </ion-card>
+<ion-content class="background">
+  <ion-img
+    src="https://i.ibb.co/DM06x1Z/5-benefits-of-coworking-space-in-india.jpg"></ion-img>
+  <ion-text color="secondary">
+    <h1
+      style="
+        width: 65%;
+        color: #fff;
+        text-align: center;
+        font-weight: 900;
+        margin: auto;">
+      Enterprise Team Colaboration
+    </h1>
+    <p
+      style="
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        width: 60%;
+        margin: auto;
+        margin-top:20px;
+        font-family: system-ui;
+        margin-top: 30 px;
+        line-height: 1em;">
+      We currently have over 20 live roles waiting for you!
+    </p>
+  </ion-text>
+  <ion-grid style="margin-top: 40px;width: 70%;">
+    <ion-row>
+      <ion-col>
+        <ion-button style="box-shadow: 3px 6px 7px 0px #0000005e;border-radius: 30px;"
+          (click)="register()"
+          mode="ios"
+          size="large"
+          shape="round"
+          expand="block"
+          color="dark">Register</ion-button>
+      </ion-col>
+    </ion-row>
+    <p class="ion-text-center" style="color: #fff">Already have an account?</p>
+    <ion-row>
+      <ion-col>
+        <ion-button style="box-shadow: 3px 6px 7px 0px #0000005e;border-radius: 30px;"
+          (click)="login()"
+          mode="ios"
+          size="large"
+          shape="round"
+          expand="block"
+          color="dark">Login</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-      <ion-row>
-        <ion-col>
-          <ion-button color="primary" expand="full" color="primary" (click)="login()">Login</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button color="primary" expand="full" color="danger" (click)="register()">Register</ion-button>
-        </ion-col>
-      </ion-row>
-  </ion-toolbar>
-</ion-footer>

@@ -37,6 +37,7 @@ export class LandingPage implements OnInit {
     });
     return await registerModal.present();
   }
+
   async login() {
     const loginModal = await this.modalController.create({
       component: LoginPage,
