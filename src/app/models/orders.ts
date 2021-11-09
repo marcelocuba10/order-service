@@ -5,6 +5,5 @@ export interface Orders {
     date?: number;
     userId?: string;
     categoryId?: string;
-    address?: string;
-    id?: string;
+    id?: number;
 }

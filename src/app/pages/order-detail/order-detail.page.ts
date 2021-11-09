@@ -29,19 +29,8 @@ export class OrderDetailPage implements OnInit {
    }
 
   ngOnInit() {
-    if (this.id) {
-      this.getOrderById();
-    }
   }
 
-  getOrderById() {
-    this.apiService.getOrderById(this.id).subscribe(response => {
-      this.order = response;
-      console.log(this.order);
-      this.getUserById();
-      this.getCategoryById();
-    });
-  }
 
   getUserById() {
     this.apiService.getUserById(this.order.userId).subscribe(response => {

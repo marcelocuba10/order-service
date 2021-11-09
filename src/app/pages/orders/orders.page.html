@@ -26,14 +26,14 @@
 
   <ion-list>
 
-    <ion-card *ngFor="let order of orders" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['/order-detail/', order.id]">
+    <ion-card *ngFor="let order of orders$ | async" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" (click)="openDetailModal(order)">
       <ion-card-header style="padding-bottom: 2px;">
         <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
         <ion-grid>
           <ion-row style="margin-left: -10px;">
             <ion-col size="5">
               <ion-text color="secondary">
-                <ion-card-subtitle>{{ order.date | date:'short' }}</ion-card-subtitle>
+                <ion-card-subtitle>{{ order.date}}</ion-card-subtitle>
               </ion-text>
             </ion-col>
             <ion-col size="4">

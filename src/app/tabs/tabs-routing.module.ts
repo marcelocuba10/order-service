@@ -33,14 +33,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/landing',
+        redirectTo: '/tabs/orders',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/landing',
+    redirectTo: '/tabs/orders',
     pathMatch: 'full'
   },
   {

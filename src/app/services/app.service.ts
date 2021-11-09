@@ -48,7 +48,12 @@ export class AppService {
     //status if present 1 or dismiss 0
 
     if (status == 1) {
-      this.loading = await this.loadingCtrl.create({ message: 'Espere..' });
+      this.loading = await this.loadingCtrl.create({ 
+        message: 'Espere..',
+        backdropDismiss: true, 
+        translucent: true,
+        duration: 2000,
+      });
       return this.loading.present();
     } else if (status == 0) {
       return this.loading.dismiss();

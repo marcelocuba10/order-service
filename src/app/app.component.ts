@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { AppService } from './services/app.service';
