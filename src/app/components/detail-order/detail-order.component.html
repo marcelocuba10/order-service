@@ -1,5 +1,5 @@
   <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button color="dark" (click)="closeModal()">
+    <ion-fab-button color="light" (click)="closeModal()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -26,16 +26,17 @@
       <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
       <ion-grid>
         <ion-row style="margin-left: -10px;">
-          <ion-col size="5">
+          <ion-col size="4.8">
             <ion-text color="secondary">
-              <ion-card-subtitle>{{ order.date }}</ion-card-subtitle>
+              <ion-card-subtitle>{{ dateOrder }}</ion-card-subtitle>
             </ion-text>
           </ion-col>
-          <ion-col size="4">
+          <ion-col size="4.3">
             <ion-card-subtitle class="ion-text-center">usuario nombre</ion-card-subtitle>
           </ion-col>
-          <ion-col size="3">
-            <ion-badge style="margin-top: -4px;" >categoria</ion-badge>
+          <ion-col size="2.9" style="text-align: end;">
+            <ion-badge style="margin-top: -4px;margin-right: -13px;" >{{ category.name }}</ion-badge>
+            <ion-badge color="warning"  >Not started</ion-badge>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -47,10 +48,9 @@
      <ion-card-subtitle style="margin-left: 10px;padding:5px"><ion-icon color="dark" name="call"></ion-icon> Phone: {{ user.phone }}</ion-card-subtitle>
     <ion-card-subtitle style="margin-left: 10px;padding:5px"><ion-icon color="dark" name="mail"></ion-icon> Email: {{ user.email}}</ion-card-subtitle>
     <ion-card-subtitle style="margin-left: 10px;padding:5px"><ion-icon color="dark" name="location"></ion-icon> Address: {{ user.address }}</ion-card-subtitle>
--->
+
     <hr style="background-color: #000;margin: 15px 0px;">
 
-<!--
     <ion-text color="secondary">
       <p style="margin-left: 17px;color: #000;font-weight:bold">Take photo</p>
     </ion-text>
@@ -64,26 +64,29 @@
         <img src="../../../assets/take-photo2.png">
       </ion-segment-button>
     </ion-segment>
--->
+
     <hr style="background-color: #000;margin: 15px 0px;">
+    
 
     <ion-text color="secondary">
       <p style="margin-left: 17px;color: #000;font-weight:bold">Observations:</p>
       <ion-textarea style="background-color: #eeeeee;border-radius: 15px;" rows="3" cols="20" clearOnEdit="true"></ion-textarea>
-    </ion-text>
+    </ion-text>-->
 
-    <ion-grid style="border-radius: 20px;">
-      <ion-row style="text-align: center;">
-        <ion-col size="4">
-          <ion-text color="secondary">
-            <ion-button size="block" mode="ios" color="success">Start</ion-button>
+    <ion-grid style="    margin-top: 10px;">
+      <ion-row style="text-align: center;margin-bottom: -10px;">
+        <ion-col>
+          <ion-text>
+            <ion-button class="label-button" size="block" mode="ios" color="dark">Start <ion-icon class="icon-buttons" name="rocket-outline"></ion-icon></ion-button>
           </ion-text>
         </ion-col>
-        <ion-col size="4">
-          <ion-button size="block" mode="ios" color="warning">Paused</ion-button>
+      </ion-row>
+      <ion-row style="text-align: center;">
+        <ion-col>
+          <ion-button class="label-button" size="block" mode="ios" color="medium">Paused <ion-icon class="icon-buttons" name="pause-circle-outline"></ion-icon></ion-button>
         </ion-col>
-        <ion-col size="4">
-          <ion-button size="block" mode="ios" color="tertiary">Finished</ion-button>
+        <ion-col>
+          <ion-button class="label-button" size="block" mode="ios" color="medium">Finished <ion-icon class="icon-buttons" name="flash-outline"></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

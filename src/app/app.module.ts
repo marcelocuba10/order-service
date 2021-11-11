@@ -11,6 +11,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [NativeStorage, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    NativeStorage, 
+    DatePipe,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -37,28 +37,34 @@
       <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Describe the service or issue:</ion-label>
       <ion-textarea rows="5" type="text" formControlName="description" class="input-simple"></ion-textarea>
     </ion-item>
-    <!--<ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
-      <ion-label style="font-size: 15px;margin-bottom: 16px;">Category</ion-label>
-      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;" [(ngModel)]="order.categoryId">
-        <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</ion-select-option>
+    <ion-item *ngIf="this.order" mode="ios" lines="none" class="item-select-st">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">{{ changeLabelSelect ? category.name : 'Category' }}</ion-label>
+      <ion-select (click)="open($event)" formControlName="categoryId" ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option *ngFor="let category of categories$ | async" [value]="category.id">{{category.name}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item lines="none" style="margin-bottom: -12px;">
+    <ion-item *ngIf="!this.order" mode="ios" lines="none" class="item-select-st">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">Category</ion-label>
+      <ion-select formControlName="categoryId" ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option *ngFor="let category of categories$ | async" [value]="category.id">{{category.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--<ion-item lines="none" style="margin-bottom: -12px;">
       <ion-label style="font-size: 20px;margin-top: -10px;" position="stacked">Capture current location:</ion-label>
-      <ion-toggle style="margin-top: 15px;" slot="end" mode="ios" checked color="dark" [(ngModel)]="toggleValue"></ion-toggle>
+      <ion-toggle style="margin-top: 15px;" slot="end" mode="ios" color="dark"></ion-toggle>
     </ion-item>
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address:</ion-label>
-      <ion-input class="input-simple" [(ngModel)]="order.address"></ion-input>
+      <ion-input formControlName="address" class="input-simple"></ion-input>
     </ion-item>
     <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
       <ion-label style="font-size: 15px;margin-bottom: 16px;">Customer</ion-label>
-      <ion-select ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;" [(ngModel)]="order.userId">
+      <ion-select ok-text="Okay" formControlName="userId" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
         <ion-select-option *ngFor="let user of users" [value]="user.id">{{user.name}}</ion-select-option>
       </ion-select>
-    </ion-item> -->
+    </ion-item>-->
     <ion-list style="text-align:center;margin-top: 10px;">
-      <ion-button (click)="submitOrder()" [disabled]="form.invalid" size="default" mode="ios" color="dark">{{ isEditMode ? 'Update' : 'Create' }} service order</ion-button>
+      <ion-button (click)="submitOrder()" size="default" mode="ios" color="dark">{{ isEditMode ? 'Update' : 'Create' }} service order</ion-button>
     </ion-list>
     
   </ion-card>

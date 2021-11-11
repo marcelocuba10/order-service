@@ -18,9 +18,10 @@ export class OrdersPage {
 
   orders$: Observable<Orders[]>;
 
-  //private orders: any;
+  private categories: any;
   //private users: any;
-  //private categories: any;
+
+  private categories$: Observable<Categories[]>;
 
   constructor(
     public apiService: ApiService,
@@ -29,18 +30,22 @@ export class OrdersPage {
   ) { }
 
   ngOnInit() {
-    this.appService.presentLoading(1);
+    console.log('run in the first moment');
+    this.getCategories();
+    //this.getUsers();
+  }
 
+  ionViewWillEnter() {
+    console.log('run in the second moment');
+    this.appService.presentLoading(1);
     this.orders$ = this.apiService.getOrders().pipe(
       tap((orders) => {
         this.appService.presentLoading(0);
-
+        console.log(orders);
         return orders;
       })
     );
     console.log(this.orders$);
-    //this.getCategories();
-    //this.getUsers();
   }
 
   async openDetailModal(order: Orders) {
@@ -78,12 +83,21 @@ export class OrdersPage {
     }
   }
 
-  // getCategories() {
-  //   this.apiService.getCategories().subscribe(response => {
-  //     this.categories = response;
-  //     console.log(this.categories);
-  //   });
+  // getCategories(){
+  //   this.categories$ = this.apiService.getCategories().pipe(
+  //     tap((categories) => {
+  //       return categories;
+  //     })
+  //   );
+  //   console.log(this.categories$);
   // }
+
+  getCategories() {
+    this.apiService.getCategories().subscribe(response => {
+      this.categories = response;
+      console.log(this.categories);
+    });
+  }
 
   // getUsers() {
   //   this.apiService.getUsers().subscribe(response => {

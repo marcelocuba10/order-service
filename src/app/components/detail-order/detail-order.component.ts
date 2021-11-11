@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { Orders } from 'src/app/models/orders';
-import { DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common'
 import { NewOrderPage } from 'src/app/pages/new-order/new-order.page';
 import { ApiService } from 'src/app/services/api.service';
 import { take } from 'rxjs/operators';
+import { Categories } from 'src/app/models/categories';
 
 @Component({
   selector: 'app-detail-order',
@@ -15,15 +16,19 @@ export class DetailOrderComponent implements OnInit {
 
   //receive data from orders page
   @Input() order: Orders;
+  category:Categories;
+  dateOrder:string;
 
   constructor(
     private modalCtrl: ModalController,
     private apiService: ApiService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    public datepipe: DatePipe
   ) { }
 
   ngOnInit() {
-    console.log(this.order)
+    this.dateOrder =this.datepipe.transform(this.order.date, 'M/d/yy, h:mm a');
+    this.getCategoryById();
   }
 
   closeModal(role = "edit") {
@@ -44,6 +49,13 @@ export class DetailOrderComponent implements OnInit {
     if (updatedOrder) {
       this.order = updatedOrder;
     }
+  }
+
+  getCategoryById(){
+    this.apiService.getCategoryById(this.order.categoryId).subscribe((data: Categories)=>{
+      this.category = data;
+      console.log(this.category)
+    });
   }
 
   async onDeleteOrder() {

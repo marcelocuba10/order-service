@@ -6,8 +6,9 @@ import { AppService } from './../../services/app.service';
 import { Orders } from 'src/app/models/orders';
 import * as moment from 'moment';
 import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Categories } from 'src/app/models/categories';
 
 @Component({
   selector: 'app-new-order',
@@ -16,14 +17,17 @@ import { Observable } from 'rxjs';
 })
 export class NewOrderPage implements OnInit {
 
-  @Input() order:Orders;
+  // if is Edit, read params
+  @Input() order: Orders;
+
   form: FormGroup;
   isEditMode = false;
-
   private id: any;
-  //private order = {} as Orders;
-  private users: any;
-  private categories: any;
+  category = {} as Categories;
+  changeLabelSelect = true;
+
+  //private users: any;
+  categories$: Observable<Categories[]>;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -31,55 +35,80 @@ export class NewOrderPage implements OnInit {
     private navCtrl: NavController,
     private appService: AppService,
     public formBuilder: FormBuilder,
-    private modalCtrl:ModalController
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
     this.initAddOrderForm();
-    //this.getCategories();
+    this.getCategories();
     //this.getUsers();
     if (this.order) {
-      this.isEditMode=true;
+      this.isEditMode = true;
+      console.log(this.order);
       this.setFormValues();
+      this.getCategoryById();
     }
   }
 
-  closeModal(data = null){
+  closeModal(data = null) {
     this.modalCtrl.dismiss(data);
   }
-  
-  initAddOrderForm(){
+
+  open(event) {
+    this.changeLabelSelect = false;
+  }
+
+  initAddOrderForm() {
     this.form = new FormGroup({
-      title: new FormControl(null,[Validators.required]),
-      description: new FormControl(null,[Validators.required]),
+      title: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      categoryId: new FormControl(null, [Validators.required]),
+      //userId: new FormControl([Validators]),
+      //address: new FormControl([Validators])
     });
   }
 
-  setFormValues(){
+  //update forms
+  setFormValues() {
     this.form.setValue({
       title: this.order.title,
       description: this.order.description,
+      categoryId: this.order.categoryId,
     });
 
     this.form.updateValueAndValidity();
   }
 
-  submitOrder(){
+  getCategoryById() {
+    this.apiService.getCategoryById(this.order.categoryId).subscribe((data: Categories) => {
+      this.category = data;
+      console.log(this.category)
+    });
+  }
+
+  submitOrder() {
     this.appService.presentLoading(1);
-    //custom input
-    this.form.value['date']= moment().locale('es').format('lll');
 
     let response: Observable<Orders>;
 
+    if (!this.form.value['title']) {
+      this.appService.presentAlert('Field ' + this.form.value['title'] + ' not valid');
+    }
+
     if (this.isEditMode) {
-      response = this.apiService.updateOrder(this.order.id,this.form.value);
-    }else{
+      response = this.apiService.updateOrder(this.order.id, this.form.value);
+    } else {
+      //custom input
+      //this.form.value['date']= moment().locale('es').format('lll');
+      this.form.value['date'] = Date.now();
+      this.form.value['status'] = "Not started";
+      console.log(this.form.value);
       response = this.apiService.addOrder(this.form.value);
     }
 
-    response.pipe(take(1)).subscribe((order) =>{
+    response.pipe(take(1)).subscribe((order) => {
       this.appService.presentLoading(0);
-      this.appService.presentToast('Order request created successfully');
+      this.appService.presentToast('Successfully');
       console.log(order);
       this.form.reset();
       this.navCtrl.navigateRoot('/tabs/orders');
@@ -91,50 +120,14 @@ export class NewOrderPage implements OnInit {
     });
   }
 
-  async saveData(data) {
-
-    if (await this.appService.formValidation(data, 'order')) {
-
-      await this.appService.presentLoading(1);
-
-      if (this.id) {
-        //is update
-        try {
-          this.apiService.updateOrder(this.id, this.order).subscribe(response => {
-            this.appService.presentLoading(0);
-            this.appService.presentToast('Order updated successfully');
-            this.navCtrl.navigateRoot('/tabs/orders');
-          });
-        } catch (error) {
-          this.appService.presentToast(error);
-          this.appService.presentLoading(0);
-          console.log(error);
-        }
-      } else {
-        //is create
-        try {
-          this.order.date = Date.now();
-          this.apiService.addOrder(data).subscribe((response) => {
-            this.appService.presentLoading(0);
-            this.appService.presentToast('Order request created successfully');
-            this.navCtrl.navigateRoot('/tabs/orders');
-          });
-        } catch (error) {
-          this.appService.presentToast(error);
-          this.appService.presentLoading(0);
-          console.log(error);
-        }
-      }
-    }
+  getCategories() {
+    this.categories$ = this.apiService.getCategories().pipe(
+      tap((categories) => {
+        return categories;
+      })
+    );
+    console.log(this.categories$);
   }
-
-
-  // getCategories(){
-  //   this.apiService.getCategories().subscribe(response => {
-  //     this.categories = response;
-  //     console.log(this.categories);
-  //   });
-  // }
 
   // getUsers(){
   //   this.apiService.getUsers().subscribe(response => {

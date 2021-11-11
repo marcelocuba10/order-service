@@ -28,12 +28,14 @@ export class ApiService {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        'Backend returned code ${error.status}, ' +
+        'body was: ${error.error}');
     }
     return throwError(
       'Something bad happened; please try again later.');
   };
+
+  //orders
 
   public getOrders(): Observable<Orders[]> {
     return this.http.get < Orders[] > (this.base_path + '/orders/');
@@ -51,7 +53,7 @@ export class ApiService {
     return this.http.delete < Orders > (this.base_path + '/orders/' + orderId);
   }
 
-  
+
   //user
   public getUsers(): Observable<Users> {
     return this.http.get < Users > (this.base_path + 'users/').pipe(
@@ -69,18 +71,12 @@ export class ApiService {
 
   //category
 
-  public getCategories(): Observable<Categories> {
-    return this.http.get < Categories > (this.base_path + 'categories/').pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
+  public getCategories(): Observable<Categories[]> {
+    return this.http.get < Categories[] > (this.base_path + '/categories/');
   }
 
   getCategoryById(id): Observable<Categories> {
-    return this.http.get < Categories > (this.base_path + 'categories/' + id).pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
+    return this.http.get < Categories > (this.base_path + '/categories/' + id);
   }
 
   //materials
