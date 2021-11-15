@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
+import { User } from './models/user';
 import { AppService } from './services/app.service';
 import { AuthService } from './services/auth.service';
 
@@ -10,6 +11,9 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  user: User;
+
   constructor(
     private authService: AuthService,
     private navCtrl: NavController,
@@ -17,6 +21,15 @@ export class AppComponent {
     private platform: Platform,
   ) {
     this.initializeApp();
+  }
+
+  ionViewWillEnter() {
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+        console.log(user)
+      }
+    );
   }
 
   initializeApp() {
@@ -37,7 +50,7 @@ export class AppComponent {
         console.log(error);
       },
       () => {
-        this.navCtrl.navigateRoot('/landing');
+        this.navCtrl.navigateRoot('/dashboard');
       }
     );
   }

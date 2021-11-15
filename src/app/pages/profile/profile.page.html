@@ -1,0 +1,49 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button style="font-size: 30px;"></ion-menu-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-grid style="border-radius: 20px;">
+    <ion-row style="margin-top: -15px;">
+      <ion-avatar style="margin:15px auto; height: 120px;width: 120px;">
+        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+      </ion-avatar>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="secondary">
+          <h2 class="head-title-center" *ngIf="user != undefined">{{ user["first_name"]  }} {{ user["last_name"]  }}</h2>
+          <h2 class="head-title-center" *ngIf="user == undefined">Walter White</h2>
+          <p class="head-subtitle-center">email@email.com</p>
+          <p class="head-subtitle-center" *ngIf="user != undefined">email@email.com</p>
+        </ion-text>
+        <ion-list style="text-align:center;margin-top: -10px;">
+          <ion-button shape="round" color="dark" size="small">Edit Profile <ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card style="width: 90%;margin:10px auto;box-shadow: 0px 0px;">
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Name</ion-label>
+      <ion-input type="text" class="input-simple"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Email</ion-label>
+      <ion-input type="text" class="input-simple"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Phone</ion-label>
+      <ion-input type="text" class="input-simple"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address</ion-label>
+      <ion-input type="text" class="input-simple"></ion-input>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

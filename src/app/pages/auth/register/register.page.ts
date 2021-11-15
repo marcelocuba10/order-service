@@ -26,6 +26,7 @@ export class RegisterPage implements OnInit {
   dismissRegister() {
     this.modalController.dismiss();
   }
+
   // On Login button tap, dismiss Register modal and open login Modal
   async loginModal() {
     this.dismissRegister();
@@ -34,6 +35,7 @@ export class RegisterPage implements OnInit {
     });
     return await loginModal.present();
   }
+
   register(form: NgForm) {
     this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
       data => {
@@ -45,7 +47,7 @@ export class RegisterPage implements OnInit {
           },
           () => {
             this.dismissRegister();
-            this.navCtrl.navigateRoot('/dashboard');
+            this.navCtrl.navigateRoot('tabs/dashboard');
           }
         );
         this.appService.presentToast('registro con sucesso');

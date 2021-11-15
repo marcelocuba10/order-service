@@ -2,12 +2,13 @@ import { AppService } from './../../services/app.service';
 import { Component } from '@angular/core';
 import { ApiService } from './../../services/api.service';
 import { Orders } from 'src/app/models/orders';
-import { Users } from 'src/app/models/users';
+import { User } from 'src/app/models/user';
 import { Categories } from 'src/app/models/categories';
 import { ModalController } from '@ionic/angular';
 import { DetailOrderComponent } from 'src/app/components/detail-order/detail-order.component';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -17,6 +18,7 @@ import { Observable } from 'rxjs';
 export class OrdersPage {
 
   orders$: Observable<Orders[]>;
+  user:User;
 
   private categories: any;
   //private users: any;
@@ -26,7 +28,8 @@ export class OrdersPage {
   constructor(
     public apiService: ApiService,
     private appService: AppService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,7 @@ export class OrdersPage {
       })
     );
     console.log(this.orders$);
+
   }
 
   async openDetailModal(order: Orders) {

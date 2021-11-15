@@ -96,6 +96,8 @@ export class NewOrderPage implements OnInit {
     }
 
     if (this.isEditMode) {
+      this.form.value['date'] = Date.now();
+      this.form.value['status'] = "Not started";
       response = this.apiService.updateOrder(this.order.id, this.form.value);
     } else {
       //custom input

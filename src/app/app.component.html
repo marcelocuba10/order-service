@@ -7,8 +7,9 @@
           <div class="header-content">
             <img src="https://i.ibb.co/HYD7CHq/w2kf-R-removebg-preview.png">
             <ion-label>
-              <h2>Thomas Walter</h2>
-              <p>usuario@hotmail.com</p>
+              <h2 *ngIf="user != undefined">{{ user["first_name"]  }} {{ user["last_name"]  }}</h2>
+              <h2 *ngIf="user == undefined">Walter White</h2>
+              <p>example@app.com</p>
             </ion-label>
           </div>
         </div>
@@ -20,7 +21,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">
-            <ion-item [routerLink]="['/tabs/orders']">
+            <ion-item [routerLink]="['/tabs/profile']">
               <ion-icon name="person-outline"></ion-icon><ion-label>Profile</ion-label>
             </ion-item>
           </ion-menu-toggle>

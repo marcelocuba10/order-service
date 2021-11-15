@@ -54,6 +54,7 @@ export class AuthService {
         })
       );
   }
+
   user() {
     const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"] });
     return this.http.get < User > (this.env.API_URL + 'auth/user', { headers: headers })
@@ -78,4 +79,5 @@ export class AuthService {
       }
     );
   };
+  
 }
