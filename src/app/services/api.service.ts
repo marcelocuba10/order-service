@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
@@ -14,7 +13,8 @@ import { Categories } from '../models/categories';
 })
 export class ApiService {
 
-  base_path = 'http://localhost:8000/api';
+  //base_path = 'http://localhost:8000/api/';
+  base_path = 'https://orderservice.hakecode.com/api';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -53,22 +53,6 @@ export class ApiService {
     return this.http.delete < Orders > (this.base_path + '/orders/' + orderId);
   }
 
-
-  //user
-  public getUsers(): Observable<Users> {
-    return this.http.get < Users > (this.base_path + 'users/').pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
-  }
-
-  getUserById(id): Observable<Users> {
-    return this.http.get < Users > (this.base_path + 'users/' + id).pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
-  }
-
   //category
 
   public getCategories(): Observable<Categories[]> {
@@ -81,29 +65,36 @@ export class ApiService {
 
   //materials
 
-  public getMaterials(): Observable<Materials> {
-    return this.http.get < Materials > (this.base_path + 'materials/').pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
+  public getMaterials(): Observable<Materials[]> {
+    return this.http.get < Materials[] > (this.base_path + '/materials/');
   }
 
   public getMaterialById(id): Observable<Materials> {
-    return this.http.get < Materials > (this.base_path + 'materials/' + id).pipe(
+    return this.http.get < Materials > (this.base_path + '/materials/' + id);
+  }
+
+  public createMaterial(material: Materials): Observable<Materials> {
+    return this.http.post < Materials > (this.base_path + '/materials/', material);
+  }
+
+  public updateMaterial(materialId: number, material: Materials): Observable<Materials> {
+    return this.http.put < Materials > (this.base_path + '/materials/' + materialId, material);
+  }
+
+  public deleteMaterial(materialId: number): Observable<Materials> {
+    return this.http.delete < Materials > (this.base_path + '/materials/' + materialId);
+  }
+
+  //user
+  public getUsers(): Observable<Users> {
+    return this.http.get < Users > (this.base_path + 'users/').pipe(
       retry(2),
       catchError(this.handleError)
     );
   }
 
-  public createMaterial(data): Observable<Materials> {
-    return this.http.post < Materials > (this.base_path + 'materials', JSON.stringify(data), this.httpOptions).pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
-  }
-
-  public updateMaterial(id, data): Observable<Materials> {
-    return this.http.put < Materials > (this.base_path + 'materials/' + id, JSON.stringify(data), this.httpOptions).pipe(
+  getUserById(id): Observable<Users> {
+    return this.http.get < Users > (this.base_path + 'users/' + id).pipe(
       retry(2),
       catchError(this.handleError)
     );

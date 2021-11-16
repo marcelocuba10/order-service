@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit {
           },
           () => {
             this.dismissRegister();
-            this.navCtrl.navigateRoot('tabs/dashboard');
+            this.navCtrl.navigateRoot('tabs/orders');
           }
         );
         this.appService.presentToast('registro con sucesso');

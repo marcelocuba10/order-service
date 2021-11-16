@@ -50,7 +50,7 @@ export class AppComponent {
         console.log(error);
       },
       () => {
-        this.navCtrl.navigateRoot('/dashboard');
+        this.navCtrl.navigateRoot('/tabs/orders');
       }
     );
   }

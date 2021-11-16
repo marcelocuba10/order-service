@@ -40,6 +40,7 @@ export class OrdersPage {
 
   ionViewWillEnter() {
     console.log('run in the second moment');
+
     this.appService.presentLoading(1);
     this.orders$ = this.apiService.getOrders().pipe(
       tap((orders) => {
@@ -49,6 +50,13 @@ export class OrdersPage {
       })
     );
     console.log(this.orders$);
+
+    //get User
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+      }
+    );
 
   }
 

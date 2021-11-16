@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { NewOrderPageRoutingModule } from './new-order-routing.module';
 import { NewOrderPage } from './new-order.page';
+
+//import forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

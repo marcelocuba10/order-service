@@ -26,18 +26,22 @@
 
   <ion-list>
 
-    <ion-card *ngFor="let material of materials" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 90%;margin:10px auto;" [routerLink]="['/new-material/', material.id]">
+    <ion-card *ngFor="let material of materials$ | async" (click)="openDetailModal(material)" class="card-st">
       <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ material.title }}</ion-card-title>
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ material.name }}</ion-card-title>
         <ion-grid>
           <ion-row style="margin-left: -10px;">
-            <ion-col size="9">
+            <ion-col size="5">
               <ion-text color="secondary">
-                <ion-card-subtitle><ion-icon name="calendar-outline" style="margin-bottom:-2px;color:#000;"></ion-icon> {{ material.date }}</ion-card-subtitle>
+                <ion-card-subtitle>{{ material.date | date:'short'}}</ion-card-subtitle>
               </ion-text>
             </ion-col>
-            <ion-col size="3">
-              <ion-badge style="margin-top: -4px;" [class.color-warning]="material.status === 'Pending'" [class.color-success]="material.status === 'Obtained'">{{ material.status }}</ion-badge>
+            <ion-col size="5">
+              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user.name }}</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="!user">Mathias Campos</ion-card-subtitle>
+            </ion-col>
+            <ion-col size="2" style="text-align: end;">
+                <ion-badge style="margin-top: -2px;margin-right: -13px;" [class.color-warning]="material.status === 'Pending'" [class.color-success]="material.status === 'Obtained'">{{ material.status }}</ion-badge>
             </ion-col>
           </ion-row>
         </ion-grid>

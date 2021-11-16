@@ -26,7 +26,7 @@
 
   <ion-list>
 
-    <ion-card *ngFor="let order of orders$ | async" style="background-color: #F0F9FD;border-radius: 20px;border: solid 1px #000;width: 93%;margin:10px auto;" (click)="openDetailModal(order)">
+    <ion-card *ngFor="let order of orders$ | async" class="card-st" (click)="openDetailModal(order)">
       <ion-card-header style="padding-bottom: 2px;">
         <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
         <ion-grid>
@@ -37,15 +37,18 @@
               </ion-text>
             </ion-col>
             <ion-col size="4">
-              <ng-container *ngFor="let user of users">
-                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId === user.id">Cliente Rtdss</ion-card-subtitle>
-              </ng-container>
+              <!--<ng-container *ngFor="let user of users">
+                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId === user.id">{{ user.name }}</ion-card-subtitle>
+                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId !== user.id">Marcos Torres</ion-card-subtitle>
+              </ng-container>-->
+              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user.name }}</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="!user">Marcos Torres</ion-card-subtitle>
             </ion-col>
             <ion-col size="3" style="text-align: end;">
                 <ng-container *ngFor="let category of categories">
                     <ion-badge style="margin-top: -4px;margin-right: -13px;" *ngIf="order.categoryId === category.id">{{ category.name }}</ion-badge>
                 </ng-container>
-                <ion-badge color="warning">{{ order.status }}</ion-badge>
+                <ion-badge style="margin-right: -13px;" color="warning">{{ order.status }}</ion-badge>
             </ion-col>
           </ion-row>
         </ion-grid>

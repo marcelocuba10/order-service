@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Materials } from 'src/app/models/materials';
 import { ApiService } from 'src/app/services/api.service';
 import { AppService } from 'src/app/services/app.service';
 import * as moment from 'moment';
+import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-material',
@@ -13,91 +16,112 @@ import * as moment from 'moment';
 })
 export class NewMaterialPage implements OnInit {
 
-  private id: any;
-  private users: any;
-  private categories: any;
-  private material = {} as Materials;
+  // if is Edit, read params
+  @Input() material: Materials;
+
+  isEditMode = false;
+  form: FormGroup;
+
+  //private id: any;
+  //private users: any;
+  //private categories: any;
+
+  //private material = {} as Materials;
 
   constructor(
     private actRoute: ActivatedRoute,
     public apiService: ApiService,
     private navCtrl: NavController,
-    private appService: AppService
+    private appService: AppService,
+    private modalCtrl: ModalController,
+    public formBuilder: FormBuilder,
   ) {
-    this.id = this.actRoute.snapshot.paramMap.get('id');
+    //this.id = this.actRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
     console.log('run in the first moment');
-    this.getCategories();
-    this.getUsers();
+    console.log(this.material)
+
+    this.initAddOrderForm();
+
+    //this.getUsers();
+    if (this.material) {
+      this.isEditMode = true;
+      console.log(this.material);
+      this.setFormValues();
+    }
   }
 
   ionViewWillEnter() {
     console.log('run in the second moment');
-    if (this.id) {
-      this.getMaterialById();
+  }
+
+  //update forms
+  setFormValues() {
+    this.form.setValue({
+      name: this.material.name,
+      description: this.material.description,
+      //categoryId: this.material.categoryId,
+    });
+
+    this.form.updateValueAndValidity();
+  }
+
+  initAddOrderForm() {
+    this.form = new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      //categoryId: new FormControl(null, [Validators.required]),
+      //userId: new FormControl([Validators]),
+      //address: new FormControl([Validators])
+    });
+  }
+
+  closeModal(data = null) {
+    this.modalCtrl.dismiss(data);
+  }
+
+  // open(event) {
+  //   this.changeLabelSelect = false;
+  // }
+
+  submitOrder() {
+    this.appService.presentLoading(1);
+
+    let response: Observable<Materials>;
+
+    if (!this.form.value['name']) {
+      this.appService.presentAlert('Field ' + this.form.value['name'] + ' not valid');
     }
-  }
 
-  getCategories(){
-    this.apiService.getCategories().subscribe(response => {
-      this.categories = response;
-      console.log(this.categories);
-    });
-  }
+    if (this.isEditMode) {
+      this.form.value['date'] = Date.now();
+      //this.form.value['status'] = "Not started";
+      console.log(this.form)
+      response = this.apiService.updateMaterial(this.material.id, this.form.value);
+    } else {
+      //custom input
+      //this.form.value['date']= moment().locale('es').format('lll');
+      this.form.value['date'] = Date.now();
+      //this.form.value['status'] = "Not started";
+      console.log(this.form.value);
+      response = this.apiService.createMaterial(this.form.value);
+    }
 
-  getUsers(){
-    this.apiService.getUsers().subscribe(response => {
-      this.users = response;
-      console.log(this.users);
-    });
-  }
+    //show message and redirect
+    response.pipe(take(1)).subscribe((material) => {
+      this.appService.presentLoading(0);
+      this.appService.presentToast('Successfully');
+      console.log(material);
+      this.form.reset();
+      this.navCtrl.navigateRoot('/tabs/materials');
 
-  public getMaterialById() {
-    this.apiService.getMaterialById(this.id).
-      subscribe(response => {
-        this.material = response;
-      });
-      console.log(this.material);
-  }
-
-  async saveData(data) {
-
-    if (await this.appService.formValidation(data, 'material')) {
-
-      await this.appService.presentLoading(1);
-
-      if (this.id) {
-        //is update
-        try {
-          this.apiService.updateMaterial(this.id, this.material).subscribe(response => {
-            this.appService.presentLoading(0);
-            this.appService.presentToast('Material updated successfully');
-            this.navCtrl.navigateRoot('/tabs/materials');
-          });
-        } catch (error) {
-          this.appService.presentToast(error);
-          this.appService.presentLoading(0);
-          console.log(error);
-        }
-      } else {
-        //is create
-        try {
-          this.material.date = moment().locale('es').format('LLL');
-          this.material.status='Pending';
-          this.apiService.createMaterial(data).subscribe((response) => {
-            this.appService.presentLoading(0);
-            this.appService.presentToast('Material request created successfully');
-            this.navCtrl.navigateRoot('/tabs/materials');
-          });
-        } catch (error) {
-          this.appService.presentToast(error);
-          this.appService.presentLoading(0);
-          console.log(error);
-        }
+      //sent data updated in the return
+      if (this.isEditMode) {
+        this.closeModal(material);
       }
-    }
+    });
   }
 
 }

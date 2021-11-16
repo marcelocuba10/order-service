@@ -41,6 +41,7 @@ export class NewOrderPage implements OnInit {
   ngOnInit() {
     this.initAddOrderForm();
     this.getCategories();
+
     //this.getUsers();
     if (this.order) {
       this.isEditMode = true;
