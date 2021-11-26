@@ -96,15 +96,16 @@ export class NewMaterialPage implements OnInit {
     }
 
     if (this.isEditMode) {
+      //action update
       this.form.value['date'] = Date.now();
-      //this.form.value['status'] = "Not started";
+      this.form.value['status'] = "Pending";
       console.log(this.form)
       response = this.apiService.updateMaterial(this.material.id, this.form.value);
     } else {
-      //custom input
-      //this.form.value['date']= moment().locale('es').format('lll');
+      //action create
+
       this.form.value['date'] = Date.now();
-      //this.form.value['status'] = "Not started";
+      this.form.value['status'] = "Pending";
       console.log(this.form.value);
       response = this.apiService.createMaterial(this.form.value);
     }

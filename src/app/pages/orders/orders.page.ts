@@ -4,7 +4,7 @@ import { ApiService } from './../../services/api.service';
 import { Orders } from 'src/app/models/orders';
 import { User } from 'src/app/models/user';
 import { Categories } from 'src/app/models/categories';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { DetailOrderComponent } from 'src/app/components/detail-order/detail-order.component';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -29,13 +29,24 @@ export class OrdersPage {
     public apiService: ApiService,
     private appService: AppService,
     private modalCtrl: ModalController,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private menu: MenuController,
+  ) {
+    this.menu.enable(true);
+  }
 
   ngOnInit() {
     console.log('run in the first moment');
     this.getCategories();
     //this.getUsers();
+
+    //get User
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+        console.log(user);
+      }
+    );
   }
 
   ionViewWillEnter() {
@@ -50,13 +61,6 @@ export class OrdersPage {
       })
     );
     console.log(this.orders$);
-
-    //get User
-    this.authService.user().subscribe(
-      user => {
-        this.user = user;
-      }
-    );
 
   }
 

@@ -4,6 +4,7 @@ import { EnvService } from './env.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { tap } from 'rxjs/operators';
 import { User } from '../models/user';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private storage: NativeStorage,
-    private env: EnvService,
+    private env: ApiService,
   ) { }
 
   login(email: string, password: string) {
@@ -37,8 +38,15 @@ export class AuthService {
     );
   }
 
-  register(fName: string, lName: string, email: string, password: string) {
-    return this.http.post(this.env.API_URL + 'auth/register', { fName, lName, email, password }
+  register(fName: string, lName: string, phone: string, address: string, email: string, password: string) {
+    const status = 1 ;
+    const role = "customer";
+    return this.http.post(this.env.API_URL + 'auth/register', { fName, lName, address, phone, email, password, status, role }
+    );
+  }
+
+  updateUserProfile(fName: string, lName: string, phone: string, address: string, email: string, password: string) {
+    return this.http.post(this.env.API_URL + 'auth/update', { fName, lName, address, phone, email, password }
     );
   }
 
@@ -56,7 +64,7 @@ export class AuthService {
   }
 
   user() {
-    const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"] });
+    const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"]});
     return this.http.get < User > (this.env.API_URL + 'auth/user', { headers: headers })
       .pipe(
         tap(user => user)
@@ -64,7 +72,6 @@ export class AuthService {
   }
 
   getToken() {
-    //ver aqui en storage si es getItem o get
     return this.storage.getItem('token').then(data => {
       this.token = data;
       if (this.token != null) {

@@ -36,8 +36,9 @@ export class RegisterPage implements OnInit {
     return await loginModal.present();
   }
 
-  register(form: NgForm) {
-    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
+  async register(form: NgForm) {
+    this.appService.presentLoading(1);
+    await this.authService.register(form.value.fName, form.value.lName, form.value.address, form.value.phone, form.value.email, form.value.password).subscribe(
       data => {
         this.authService.login(form.value.email, form.value.password).subscribe(
           () => {
@@ -47,6 +48,7 @@ export class RegisterPage implements OnInit {
           },
           () => {
             this.dismissRegister();
+            this.appService.presentLoading(0);
             this.navCtrl.navigateRoot('tabs/orders');
           }
         );

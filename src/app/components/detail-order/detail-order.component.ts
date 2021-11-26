@@ -6,6 +6,9 @@ import { NewOrderPage } from 'src/app/pages/new-order/new-order.page';
 import { ApiService } from 'src/app/services/api.service';
 import { take } from 'rxjs/operators';
 import { Categories } from 'src/app/models/categories';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-detail-order',
@@ -18,17 +21,27 @@ export class DetailOrderComponent implements OnInit {
   @Input() order: Orders;
   category:Categories;
   dateOrder:string;
+  user:User;
 
   constructor(
     private modalCtrl: ModalController,
     private apiService: ApiService,
     private loadingCtrl: LoadingController,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.dateOrder =this.datepipe.transform(this.order.date, 'M/d/yy, h:mm a');
     this.getCategoryById();
+
+    //get User
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+        console.log(user);
+      }
+    );
   }
 
   closeModal(role = "edit") {

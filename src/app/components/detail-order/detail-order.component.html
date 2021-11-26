@@ -32,7 +32,7 @@
             </ion-text>
           </ion-col>
           <ion-col size="4.3">
-            <ion-card-subtitle class="ion-text-center">usuario nombre</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" [ngIf]="user">{{ user["first_name"]  }} {{ user["last_name"]  }}</ion-card-subtitle>
           </ion-col>
           <ion-col size="2.9" style="text-align: end;">
             <ion-badge style="margin-top: -4px;margin-right: -13px;">{{ category.name }}</ion-badge>

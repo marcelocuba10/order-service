@@ -32,7 +32,7 @@
             </ion-text>
           </ion-col>
           <ion-col size="4.3">
-            <ion-card-subtitle class="ion-text-center">Marcos Torres</ion-card-subtitle>
+            <ion-card-subtitle class="ion-text-center" [ngIf]="user">{{ user["first_name"]  }} {{ user["last_name"]  }}</ion-card-subtitle>
           </ion-col>
           <ion-col size="2.9" style="text-align: end;">
             <ion-badge color="warning" style="margin-right: -13px;" [class.color-warning]="material.status === 'Pending'" [class.color-success]="material.status === 'Obtained'">{{ material.status }}</ion-badge>

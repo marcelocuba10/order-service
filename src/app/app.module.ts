@@ -13,12 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     HttpClientModule, 
     BrowserModule, 
+    CommonModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
     FormsModule,

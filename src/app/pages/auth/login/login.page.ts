@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
+import { User } from 'src/app/models/user';
 import { AppService } from 'src/app/services/app.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterPage } from '../register/register.page';
@@ -11,6 +12,8 @@ import { RegisterPage } from '../register/register.page';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  user: User;
 
   constructor(
     private modalController: ModalController,
@@ -35,8 +38,10 @@ export class LoginPage implements OnInit {
     });
     return await registerModal.present();
   }
-  login(form: NgForm) {
-    this.authService.login(form.value.email, form.value.password).subscribe(
+  async login(form: NgForm) {
+
+    this.appService.presentLoading(1);
+    await this.authService.login(form.value.email, form.value.password).subscribe(
       data => {
         this.appService.presentToast('Logged In');
       },
@@ -45,7 +50,8 @@ export class LoginPage implements OnInit {
       },
       () => {
         this.dismissLogin();
-        this.navCtrl.navigateRoot('/tabs/orders');
+        this.appService.presentLoading(0);
+        this.navCtrl.navigateRoot('tabs/orders');
       }
     );
   }

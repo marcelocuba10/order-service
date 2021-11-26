@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { AppService } from 'src/app/services/app.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,20 +14,37 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProfilePage implements OnInit {
 
   user: User;
+  form: FormGroup;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private appService: AppService,
+    public formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
     this.authService.user().subscribe(
       user => {
         this.user = user;
+        console.log(this.user);
       }
     );
+  }
+
+  update(form: NgForm) {
+
+    this.authService.updateUserProfile(form.value.fname, form.value.lname, form.value.email, form.value.password, form.value.address, form.value.phone).subscribe(
+      data => {
+        this.appService.presentToast('updated sucessfully');
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+
+      }
+    );
+
   }
 
 }

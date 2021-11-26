@@ -5,6 +5,8 @@ import { Materials } from 'src/app/models/materials';
 import { NewMaterialPage } from 'src/app/pages/new-material/new-material.page';
 import { ApiService } from 'src/app/services/api.service';
 import { take } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-detail-material',
@@ -16,15 +18,27 @@ export class DetailMaterialComponent implements OnInit {
   //receive data from orders page
   @Input() material: Materials;
   dateOrder: string;
+  user:User;
 
   constructor(
     private modalCtrl: ModalController,
     private apiService: ApiService,
     private loadingCtrl: LoadingController,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
+    //run in the first moment
+
+    //get User
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+        console.log(user);
+      }
+    );
+
     this.dateOrder = this.datepipe.transform(this.material.date, 'M/d/yy, h:mm a');
   }
 

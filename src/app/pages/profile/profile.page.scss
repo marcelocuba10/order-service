@@ -9,13 +9,27 @@
     text-align: center;
     color: #000;
     font-weight: 700;
-    font-family: cursive;
 }
 
 .head-subtitle-center{
     text-align: center;
     color: #404040;
     margin-top: -10px;
-    font-family: cursive;
 }
 
+.bg-card{
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #ffc107;
+    padding: 85px 0px 40px 0px;
+}
+
+.text-subtitle{
+    text-align: center;
+    font-size: 14px;
+    color:#1b1919;
+}
+
+ion-content{
+    --background: #fff url("https://i.ibb.co/wYkMBBD/bg-exchange.webp") no-repeat center center / cover;
+}

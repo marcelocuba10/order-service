@@ -41,8 +41,8 @@
                   <ion-card-subtitle class="ion-text-center" *ngIf="order.userId === user.id">{{ user.name }}</ion-card-subtitle>
                   <ion-card-subtitle class="ion-text-center" *ngIf="order.userId !== user.id">Marcos Torres</ion-card-subtitle>
               </ng-container>-->
-              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user.name }}</ion-card-subtitle>
-              <ion-card-subtitle class="ion-text-center" *ngIf="!user">Marcos Torres</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user["first_name"]  }} {{ user["last_name"]  }}</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="!user">User loading</ion-card-subtitle>
             </ion-col>
             <ion-col size="3" style="text-align: end;">
                 <ng-container *ngFor="let category of categories">

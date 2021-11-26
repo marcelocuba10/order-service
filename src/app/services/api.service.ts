@@ -13,11 +13,16 @@ import { Categories } from '../models/categories';
 })
 export class ApiService {
 
-  //base_path = 'http://localhost:8000/api/';
-  base_path = 'https://orderservice.hakecode.com/api';
+  API_URL = 'http://localhost:8000/api/';
+  //API_URL = 'https://orderservice.hakecode.com/api';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Accept': 'application/json, text/plain'
+    })
   };
 
   constructor(private http: HttpClient) { }
@@ -38,63 +43,63 @@ export class ApiService {
   //orders
 
   public getOrders(): Observable<Orders[]> {
-    return this.http.get < Orders[] > (this.base_path + '/orders/');
+    return this.http.get < Orders[] > (this.API_URL + 'orders/');
   }
 
   public addOrder(order: Orders): Observable<Orders> {
-    return this.http.post < Orders > (this.base_path + '/orders/', order);
+    return this.http.post < Orders > (this.API_URL + 'orders/', order);
   }
 
   public updateOrder(orderId: number, order: Orders): Observable<Orders> {
-    return this.http.put < Orders > (this.base_path + '/orders/' + orderId, order);
+    return this.http.put < Orders > (this.API_URL + 'orders/' + orderId, order);
   }
 
   public deleteOrder(orderId: number): Observable<Orders> {
-    return this.http.delete < Orders > (this.base_path + '/orders/' + orderId);
+    return this.http.delete < Orders > (this.API_URL + 'orders/' + orderId);
   }
 
   //category
 
   public getCategories(): Observable<Categories[]> {
-    return this.http.get < Categories[] > (this.base_path + '/categories/');
+    return this.http.get < Categories[] > (this.API_URL + 'categories/');
   }
 
   getCategoryById(id): Observable<Categories> {
-    return this.http.get < Categories > (this.base_path + '/categories/' + id);
+    return this.http.get < Categories > (this.API_URL + 'categories/' + id);
   }
 
   //materials
 
   public getMaterials(): Observable<Materials[]> {
-    return this.http.get < Materials[] > (this.base_path + '/materials/');
+    return this.http.get < Materials[] > (this.API_URL + 'materials/');
   }
 
   public getMaterialById(id): Observable<Materials> {
-    return this.http.get < Materials > (this.base_path + '/materials/' + id);
+    return this.http.get < Materials > (this.API_URL + 'materials/' + id);
   }
 
   public createMaterial(material: Materials): Observable<Materials> {
-    return this.http.post < Materials > (this.base_path + '/materials/', material);
+    return this.http.post < Materials > (this.API_URL + 'materials/', material);
   }
 
   public updateMaterial(materialId: number, material: Materials): Observable<Materials> {
-    return this.http.put < Materials > (this.base_path + '/materials/' + materialId, material);
+    return this.http.put < Materials > (this.API_URL + 'materials/' + materialId, material);
   }
 
   public deleteMaterial(materialId: number): Observable<Materials> {
-    return this.http.delete < Materials > (this.base_path + '/materials/' + materialId);
+    return this.http.delete < Materials > (this.API_URL + 'materials/' + materialId);
   }
 
   //user
   public getUsers(): Observable<Users> {
-    return this.http.get < Users > (this.base_path + 'users/').pipe(
+    return this.http.get < Users > (this.API_URL + 'users/').pipe(
       retry(2),
       catchError(this.handleError)
     );
   }
 
   getUserById(id): Observable<Users> {
-    return this.http.get < Users > (this.base_path + 'users/' + id).pipe(
+    return this.http.get < Users > (this.API_URL + 'users/' + id).pipe(
       retry(2),
       catchError(this.handleError)
     );

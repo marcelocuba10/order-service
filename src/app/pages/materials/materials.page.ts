@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { DetailMaterialComponent } from 'src/app/components/detail-material/detail-material.component';
@@ -25,14 +25,24 @@ export class MaterialsPage implements OnInit {
     public apiService: ApiService,
     private authService: AuthService,
     private modalCtrl: ModalController,
-    private appService: AppService
-  ) { }
+    private appService: AppService,
+    private menu: MenuController,
+  ) {
+    this.menu.enable(true);
+   }
 
   ngOnInit() {
     console.log('run in the first moment');
 
     //this.getCategories();
-    //this.getUsers();
+
+    //get User
+    this.authService.user().subscribe(
+      user => {
+        this.user = user;
+        console.log(user);
+      }
+    );
   }
 
   ionViewWillEnter() {
@@ -47,13 +57,6 @@ export class MaterialsPage implements OnInit {
       })
     );
     console.log(this.materials$);
-
-    //get User
-    this.authService.user().subscribe(
-      user => {
-        this.user = user;
-      }
-    );
   }
 
   async openDetailModal(material: Materials) {

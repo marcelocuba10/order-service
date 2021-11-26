@@ -36,11 +36,11 @@
                 <ion-card-subtitle>{{ material.date | date:'short'}}</ion-card-subtitle>
               </ion-text>
             </ion-col>
-            <ion-col size="5">
-              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user.name }}</ion-card-subtitle>
-              <ion-card-subtitle class="ion-text-center" *ngIf="!user">Mathias Campos</ion-card-subtitle>
+            <ion-col size="4">
+              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user["first_name"]  }} {{ user["last_name"]  }}</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="!user">User loading</ion-card-subtitle>
             </ion-col>
-            <ion-col size="2" style="text-align: end;">
+            <ion-col size="3" style="text-align: end;">
                 <ion-badge style="margin-top: -2px;margin-right: -13px;" [class.color-warning]="material.status === 'Pending'" [class.color-success]="material.status === 'Obtained'">{{ material.status }}</ion-badge>
             </ion-col>
           </ion-row>
