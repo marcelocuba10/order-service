@@ -37,38 +37,22 @@
   <form #form="ngForm" (ngSubmit)="register(form)" method="post" style="width: 80%; margin: auto">
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">First Name</ion-label>
-      <ion-input
-        ngModel
-        type="text"
-        name="fName"
-        class="input-cl"></ion-input>
+      <ion-input ngModel type="text" name="fName" class="input-cl"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Last Name</ion-label>
-      <ion-input
-        ngModel
-        type="text"
-        name="lName"
-        class="input-cl"></ion-input>
+      <ion-input ngModel type="text" name="lName" class="input-cl"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Phone</ion-label>
-      <ion-input
-        ngModel
-        type="text"
-        name="phone"
-        class="input-cl"></ion-input>
+      <ion-input ngModel type="text" name="phone" class="input-cl"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Address</ion-label>
-      <ion-input
-        ngModel
-        type="text"
-        name="address"
-        class="input-cl"></ion-input>
+      <ion-input ngModel type="text" name="address" class="input-cl"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
@@ -78,14 +62,10 @@
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Password</ion-label>
-      <ion-input
-        ngModel
-        type="password"
-        name="password" class="input-cl"></ion-input>
+      <ion-input ngModel type="password" name="password" class="input-cl"></ion-input>
     </ion-item>
 
-    <ion-button
-      type="submit"
+    <ion-button type="submit"
       style="
         box-shadow: 3px 6px 7px 0px #0000005e;
         border-radius: 30px;
@@ -98,8 +78,7 @@
   </form>
   
   <ion-text color="secondary">
-    <h1
-      style="
+    <h1 style="
         text-align: center;
         color: #5e5e5e;
         font-size: 18px;
@@ -112,8 +91,7 @@
   <ion-grid style="width: 50%">
     <ion-row>
       <ion-col>
-        <ion-icon
-          style="
+        <ion-icon style="
             font-size: 35px;
             color: #525252;
             float: right;
@@ -121,8 +99,7 @@
           name="logo-google"></ion-icon>
       </ion-col>
       <ion-col>
-        <ion-icon
-          style="
+        <ion-icon style="
             font-size: 35px;
             color: #525252;
             float: left;
@@ -131,8 +108,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <p style="text-align: center; padding-right: 20px; font-size: 14px">
-    Developed by <b>ConectaCode - Apis</b>
-  </p>
+  <p style="text-align: center; padding-right: 20px; font-size: 14px"> Developed by <b>ConectaCode - Apis</b></p>
   
 </ion-content>

@@ -30,8 +30,7 @@
               margin-top: 20px;
               font-family: system-ui;
               line-height: 1em;">
-            Welcome back, you've been missed!
-          </p>
+            Welcome back, you've been missed!</p>
         </ion-text>
       </ion-col>
     </ion-row>
@@ -40,11 +39,7 @@
   <form #form="ngForm" (ngSubmit)="login(form)" method="post" style="width: 80%; margin: auto">
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Email</ion-label>
-      <ion-input
-        ngModel
-        type="email"
-        name="email"
-        style="
+      <ion-input ngModel type="email" name="email" style="
           padding: 5px 10px !important;
           border: 1px solid #000;
           border-radius: 15px;
@@ -53,10 +48,7 @@
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Password</ion-label>
-      <ion-input
-        ngModel
-        type="password"
-        name="password"
+      <ion-input ngModel type="password" name="password"
         style="
           padding: 5px 10px !important;
           border: 1px solid #000;
@@ -64,13 +56,9 @@
           border-bottom: solid 2px #464646;"></ion-input>
     </ion-item>
 
-    <p style="text-align: right; padding-right: 20px; font-size: 14px">
-      Forgot Password?
-    </p>
+    <p style="text-align: right; padding-right: 20px; font-size: 14px">Forgot Password?</p>
 
-    <ion-button
-      type="submit"
-      style="
+    <ion-button type="submit" style="
         box-shadow: 3px 6px 7px 0px #0000005e;
         border-radius: 30px;
         margin-top: 40px;"
@@ -81,8 +69,7 @@
       color="dark">Sign In</ion-button>
   </form>
   <ion-text color="secondary">
-    <h1
-      style="
+    <h1 style="
         text-align: center;
         color: #5e5e5e;
         font-size: 18px;
@@ -95,8 +82,7 @@
   <ion-grid style="width: 50%">
     <ion-row>
       <ion-col>
-        <ion-icon
-          style="
+        <ion-icon style="
             font-size: 35px;
             color: #525252;
             float: right;
@@ -104,8 +90,7 @@
           name="logo-google"></ion-icon>
       </ion-col>
       <ion-col>
-        <ion-icon
-          style="
+        <ion-icon style="
             font-size: 35px;
             color: #525252;
             float: left;
@@ -114,8 +99,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <p style="text-align: center; padding-right: 20px; font-size: 14px">
-    Don't have a account? <b (click)="registerModal()">Register</b>
-  </p>
+  <p style="text-align: center; padding-right: 20px; font-size: 14px"> Don't have a account? <b (click)="registerModal()">Register</b></p>
   
 </ion-content>

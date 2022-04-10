@@ -25,21 +25,21 @@ export class AuthService {
     return this.http.post(this.env.API_URL + 'auth/login', { email, password }
     ).pipe(tap(token => {
       //ver aqui el storage, setItem o set
-        this.storage.setItem('token', token).then(
-          () => {
-            console.log('Token Stored');
-          },
-          error => console.error('Error storing item', error)
-        );
-        this.token = token;
-        this.isLoggedIn = true;
-        return token;
-      }),
+      this.storage.setItem('token', token).then(
+        () => {
+          console.log('Token Stored');
+        },
+        error => console.error('Error storing item', error)
+      );
+      this.token = token;
+      this.isLoggedIn = true;
+      return token;
+    }),
     );
   }
 
   register(fName: string, lName: string, phone: string, address: string, email: string, password: string) {
-    const status = 1 ;
+    const status = 1;
     const role = "customer";
     return this.http.post(this.env.API_URL + 'auth/register', { fName, lName, address, phone, email, password, status, role }
     );
@@ -64,8 +64,8 @@ export class AuthService {
   }
 
   user() {
-    const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"]});
-    return this.http.get < User > (this.env.API_URL + 'auth/user', { headers: headers })
+    const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"] });
+    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
       .pipe(
         tap(user => user)
       );
@@ -86,5 +86,5 @@ export class AuthService {
       }
     );
   };
-  
+
 }

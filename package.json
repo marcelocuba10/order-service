@@ -1,8 +1,8 @@
 {
   "name": "OrderService",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Hakecode",
+  "homepage": "https://hakecode.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -69,5 +69,5 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"
   },
-  "description": "An Ionic project"
+  "description": "Order Service App"
 }
